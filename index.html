@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Súper Bienvenida!</title>
+    <!-- Carga de Tailwind CSS para un diseño moderno --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración de estilos y fuente Inter --><style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Fondo con degradado suave y femenino */
+            background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 100%); /* Rosado claro a Lavanda suave */
+        }
+        
+        /* Estilos para el efecto de máquina de escribir controlado por JS */
+        #mensaje-dinamico {
+            display: inline-block;
+            border-right: .15em solid #db2777; /* Cursor de color rosa oscuro */
+        }
+        
+        /* Animación de parpadeo del cursor */
+        .blinking-cursor {
+            animation: blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #db2777; } /* Cursor rosa oscuro intermitente */
+        }
+
+        /* Keyframes para una animación de brillo sutil en el borde */
+        .glow-border {
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.4); /* Sombra rosa suave */
+        }
+        .hover\:shadow-pink-glow:hover {
+            box-shadow: 0 25px 50px -12px rgba(236, 72, 153, 0.5), 0 0 30px rgba(236, 72, 153, 0.6);
+        }
+    </style>
+</head>
+<body class="flex justify-center items-center min-h-screen p-6">
+
+    <!-- Tarjeta de Bienvenida (Postal) con tamaño y estilo más femenino --><div class="max-w-2xl w-full bg-white rounded-3xl p-10 sm:p-16 
+                border-[8px] border-pink-400 transform transition duration-500 
+                hover:scale-[1.03] hover:shadow-pink-glow shadow-xl glow-border">
+        
+        <!-- Encabezado y Título más grande --><header class="text-center mb-10">
+            <div class="text-7xl mb-6 text-yellow-400 animate-pulse">
+                🎉✨
+            </div>
+            <h1 class="text-5xl sm:text-6xl font-black text-pink-700 tracking-tighter leading-tight">
+                ¡BIENVENIDA COMPAÑERA!
+            </h1>
+        </header>
+
+        <!-- Contenido Principal con Animación de Escritura --><main class="text-center">
+            <p class="text-xl sm:text-2xl text-gray-500 mb-8 italic">
+                Estoy muy contento que por fin estes aquí.
+            </p>
+
+            <div class="bg-pink-50 p-8 rounded-2xl mb-10 shadow-lg min-h-[6rem] flex justify-center items-center">
+                <p class="text-2xl sm:text-3xl font-extrabold text-pink-800 text-left w-full">
+                    <!-- El texto se añadirá aquí carácter por carácter por JavaScript --><span id="mensaje-dinamico" class="font-mono"></span>
+                </p>
+            </div>
+            
+            <div class="flex justify-center space-x-6 sm:space-x-8 text-6xl mb-8">
+                <!-- Emojis más grandes con efecto de "temblor" al pasar el ratón --><span class="hover:scale-110 transition duration-150 transform hover:rotate-6">☕</span>
+                <span class="hover:scale-110 transition duration-150 transform hover:rotate-6">😄</span>
+                <span class="hover:scale-110 transition duration-150 transform hover:rotate-6">🌟</span>
+                <span class="hover:scale-110 transition duration-150 transform hover:rotate-6">🏋️‍♀️</span> <!-- Pesa con figura femenina --></div>
+
+            <p class="text-lg text-gray-600 font-medium">
+                ¡Que empiece esta nueva y emocionante etapa!
+            </p>
+        </main>
+
+        <!-- Pie de página / Firma --><footer class="mt-12 pt-6 border-t-2 border-pink-200 text-center">
+            <p class="text-base text-pink-600 font-bold">
+                Con cariño, de parte de tu gran amigo Albert.
+            </p>
+        </footer>
+    </div>
+
+    <!-- Script de JavaScript para la animación de máquina de escribir (Funciona perfecto ahora) --><script>
+        const mensaje = "Prepárate para mucho café ☕, risas 😄 y momentos increíbles.";
+        const elemento = document.getElementById('mensaje-dinamico');
+        let index = 0;
+        const speed = 70; // Velocidad de escritura en milisegundos
+
+        function typeWriter() {
+            if (index < mensaje.length) {
+                elemento.textContent += mensaje.charAt(index);
+                index++;
+                setTimeout(typeWriter, speed);
+            } else {
+                elemento.classList.remove('blinking-cursor');
+                elemento.style.borderRight = 'none'; 
+            }
+        }
+
+        function startTyping() {
+            elemento.classList.add('blinking-cursor');
+            setTimeout(typeWriter, 500); 
+        }
+
+        window.onload = startTyping;
+    </script>
+</body>
+</html>
